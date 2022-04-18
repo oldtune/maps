@@ -1,3 +1,4 @@
+mod controllers;
 #[macro_use]
 extern crate rocket;
 
@@ -8,5 +9,8 @@ fn hello() -> &'static str {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![hello])
+    rocket::build().mount("/", routes![hello]).mount(
+        "/query",
+        routes![controllers::mapcontroller::get_location_by_latlng],
+    )
 }
